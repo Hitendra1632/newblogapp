@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 20141228225730) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "attachments", force: true do |t|
@@ -29,6 +32,7 @@ ActiveRecord::Schema.define(version: 20141228225730) do
   end
 
   create_table "authors", force: true do |t|
+    t.string   "username",         null: false
     t.string   "email",            null: false
     t.string   "crypted_password", null: false
     t.string   "salt",             null: false
@@ -45,8 +49,6 @@ ActiveRecord::Schema.define(version: 20141228225730) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

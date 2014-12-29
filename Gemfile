@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+require 'rubygems'
+require 'bundler/setup'
+#require 'nokogiri'
+# require your gems as usual
 
 gem "paperclip"
 gem 'sorcery'

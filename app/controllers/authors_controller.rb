@@ -1,16 +1,8 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
-
+  before_filter :require_login, except: [:new, :create]
   # GET /authors
   # GET /authors.json
-  before_filter :zero_authors_or_authenticated, only: [:new, :create]
-  before_filter :require_login, except: [:new, :create]
-def zero_authors_or_authenticated
-  unless Author.count == 0 || current_user
-    redirect_to root_path
-    return false
-  end
-end
   def index
     @authors = Author.all
   end
@@ -79,4 +71,12 @@ end
     def author_params
       params.require(:author).permit(:username, :email, :password, :password_confirmation)
     end
+    before_filter :zero_authors_or_authenticated, only: [:new, :create]
+
+  def zero_authors_or_authenticated
+    unless Author.count == 0 || current_user
+     redirect_to root_path
+      return false
+    end
+  end
 end
